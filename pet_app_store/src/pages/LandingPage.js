@@ -1,19 +1,15 @@
 import React from 'react';
-import {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {getPets} from '../actions/Pets';
+import cat from '../images/cat.jpg';
+import {Link} from 'react-router-dom';
+import './LandingPage.css';
 
 const LandingPage = () => {
-  const pets = useSelector(state => state.pets);
-  const dispatch = useDispatch();
-  console.log(pets);
-  useEffect(() => {
-    dispatch(getPets());
-  }, []);
-
   return (
-    <div>
-      <h1>Under Construction</h1>
+    <div className="landing-page__container">
+      <img src={cat} alt="Cat"></img>
+      <h1>FILL YOUR HOME WITH LOVE!</h1>
+      <h2>Choose your favorite pet!</h2>
+      <Link to="/pets">View Pets List</Link>
     </div>
   );
 };

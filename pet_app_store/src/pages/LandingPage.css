@@ -1,0 +1,31 @@
+body {
+  margin: 0, auto;
+  background-color: black;
+}
+
+.landing-page__container {
+  padding: 1rem;
+  background-color: rgb(31, 31, 31);
+  margin: 2rem auto;
+  max-width: 80%;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  color: rgb(130, 133, 130);
+}
+
+.landing-page__container img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+}
+.landing-page__container button {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #112010;
+  background-color: #364411;
+  color: white;
+  border-radius: 6px;
+  font-size: large;
+}

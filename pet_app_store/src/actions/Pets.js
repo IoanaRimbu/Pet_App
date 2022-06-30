@@ -10,10 +10,15 @@ const receivePetsSuccess = data => ({
   type: types.RECIVE_PETS_SUCCESS,
 });
 
-export const getPets = () => async dispatch => {
+const requestPets = () => ({
+  type: types.REQUEST_PETS,
+});
+
+export const getPets = status => async dispatch => {
+  dispatch(requestPets());
   try {
     const response = await axios.get(
-      'https://petstore.swagger.io/v2/pet/findByStatus?status=available'
+      `https://petstore.swagger.io/v2/pet/findByStatus?status=${status}`
     );
     dispatch(receivePetsSuccess(response.data));
   } catch (error) {
