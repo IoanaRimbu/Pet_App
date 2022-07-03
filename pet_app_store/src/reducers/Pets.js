@@ -24,6 +24,22 @@ const pets = (state = intialState, action) => {
         ...state,
         isLoading: true,
       };
+    case 'CREATE_PETS_SUCCESS':
+      return {
+        ...state,
+        pet: payload,
+        error: null,
+        isLoading: false,
+        recivedPet: true,
+      };
+    case 'CREATE_PETS_FAILURE':
+      return {
+        ...state,
+        error: payload,
+        pet: null,
+        isLoading: false,
+        recivedPet: false,
+      };
     default:
       return state;
   }

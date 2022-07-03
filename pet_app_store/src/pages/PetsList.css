@@ -1,3 +1,29 @@
-.pets-list__table{
-    color:white;
+.pet-list__container {
+  box-sizing: border-box;
+  padding: 10%;
+  text-align: start;
+}
+
+#new_entry_new_pet {
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 6px;
+  font-size: large;
+  margin-bottom: 1vh;
+}
+.header-display {
+  display: flex;
+  justify-content: space-between;
+}
+.header-display p {
+  color: rgb(82, 82, 249);
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 6px;
+  font-size: large;
+  margin-bottom: 1vh;
 }

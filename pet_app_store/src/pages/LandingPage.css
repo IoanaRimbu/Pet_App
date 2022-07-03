@@ -1,8 +1,3 @@
-body {
-  margin: 0, auto;
-  background-color: black;
-}
-
 .landing-page__container {
   padding: 1rem;
   background-color: rgb(31, 31, 31);
@@ -11,6 +6,16 @@ body {
   text-align: center;
   border-radius: 12px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+}
+
+.landing-page__container h1 {
+  font-weight: 700;
+  margin: 0;
+  color: rgb(130, 133, 130);
+}
+
+.landing-page__container h2 {
+  font-weight: 700;
   color: rgb(130, 133, 130);
 }
 
@@ -19,13 +24,18 @@ body {
   border-radius: 12px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
-.landing-page__container button {
-  font: inherit;
-  cursor: pointer;
+
+.landing-page__container a {
+  text-decoration: none;
+  display: inline-block;
   padding: 0.5rem 1.5rem;
   border: 1px solid #112010;
   background-color: #364411;
   color: white;
   border-radius: 6px;
   font-size: large;
+}
+
+.landing-page__container a:hover {
+  color: white;
 }

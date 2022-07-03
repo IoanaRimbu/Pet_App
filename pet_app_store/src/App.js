@@ -2,6 +2,7 @@ import './App.css';
 import LandingPage from './pages/LandingPage';
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import PetsList from './pages/PetsList';
+import AddingPet from './pages/AddingPet';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/pets" element={<PetsList />} />
+        <Route path="/pets/addPet" element={<AddingPet />} />
       </Routes>
     </BrowserRouter>
   );

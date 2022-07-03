@@ -1,0 +1,15 @@
+.add-pet {
+  padding: 2rem;
+  max-width: fit-content;
+}
+/* .status-field__selector {
+  width: 80%;
+} */
+/* .foto-urls__input {
+  padding: 50px;
+} */
+.add-new-url {
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+}
