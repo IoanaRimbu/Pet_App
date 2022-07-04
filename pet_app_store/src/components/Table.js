@@ -2,7 +2,14 @@ import React from 'react';
 import {Table} from 'antd';
 import 'antd/dist/antd.css';
 
-const DefaultTable = ({className, columns, bordered, data, pagination}) => {
+const DefaultTable = ({
+  className,
+  columns,
+  bordered,
+  data,
+  pagination,
+  rowKey,
+}) => {
   return (
     <Table
       className={className}
@@ -10,6 +17,7 @@ const DefaultTable = ({className, columns, bordered, data, pagination}) => {
       bordered={bordered}
       dataSource={data}
       pagination={pagination}
+      rowKey={rowKey}
     />
   );
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {message, Space} from 'antd';
+import {Modal, Space} from 'antd';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getPets} from '../actions/Pets';
+import {deletePet, getPets} from '../actions/Pets';
 import DefaultTable from '../components/Table';
 import 'antd/dist/antd.css';
 import './PetsList.css';
@@ -16,6 +16,7 @@ const PetsList = () => {
 
   const pets = useSelector(state => state.pets);
   const pet = useSelector(state => state.pet);
+  const deletedPet = useSelector(state => state.deletedPet);
   const error = useSelector(state => state.error);
   const loading = useSelector(state => state.isLoading);
   const dispatch = useDispatch();
@@ -25,17 +26,22 @@ const PetsList = () => {
   }, [petStatus]);
 
   useEffect(() => {
-    if (pet && !error) {
-      setHeaderDisplayMessage('Pet added with success');
-      setHeaderDisplay(true);
-    } else if (!pets && loading) {
-      setHeaderDisplayMessage('Pet added - error');
+    if (!error) {
+      if (pet) {
+        setHeaderDisplayMessage('Pet added with success');
+        setHeaderDisplay(true);
+      } else if (deletedPet) {
+        setHeaderDisplayMessage('Pet deleted with success');
+        setHeaderDisplay(true);
+      }
+    } else if (error) {
+      setHeaderDisplayMessage('Something went wrong...');
       setHeaderDisplay(true);
     }
     setTimeout(() => {
       setHeaderDisplay(false);
     }, 2000);
-  }, [pet]);
+  }, [loading]);
 
   const handleStatus = e => {
     setPetStatus(e.target.value);
@@ -63,10 +69,24 @@ const PetsList = () => {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
-        <Space size="middle">
+        <Space perStatus={petStatus} size="middle">
           <a>View</a>
           <a>Edit</a>
-          <a>Delete</a>
+          <a
+            onClick={e => {
+              Modal.confirm({
+                title: 'Are you sure you want to delete this pet?',
+                onOk: () => {
+                  dispatch(deletePet(record.id));
+                  setTimeout(() => {
+                    dispatch(getPets(petStatus));
+                  }, 2000);
+                },
+              });
+            }}
+          >
+            Delete
+          </a>
         </Space>
       ),
     },
@@ -78,7 +98,11 @@ const PetsList = () => {
         <Link to="/pets/addPet" id="new_entry_new_pet">
           Add new pet
         </Link>
-        {headerDisplay && <p>{headerDisplayMessage}</p>}
+        {headerDisplay && (
+          <p style={{borderColor: error && 'red', color: error && 'red'}}>
+            {headerDisplayMessage}
+          </p>
+        )}
       </div>
 
       <div>
@@ -93,6 +117,7 @@ const PetsList = () => {
         data={pets}
         columns={columns}
         className="pets-list__table"
+        // rowKey="id"
         pagination={{
           onChange(current) {
             setPage(current);

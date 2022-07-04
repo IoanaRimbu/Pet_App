@@ -40,6 +40,20 @@ const pets = (state = intialState, action) => {
         isLoading: false,
         recivedPet: false,
       };
+    case 'DELETE_PET_SUCCESS':
+      return {
+        ...state,
+        error: null,
+        isLoading: false,
+        deletedPet: true,
+      };
+    case 'DELETE_PET_FAILURE':
+      return {
+        ...state,
+        error: payload,
+        isLoading: false,
+        deletedPet: false,
+      };
     default:
       return state;
   }

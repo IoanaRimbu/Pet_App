@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {Button, Form, Input, Select} from 'antd';
 import {MinusCircleOutlined, PlusOutlined} from '@ant-design/icons';
-import {postPets} from '../actions/CreatePet';
+import {postPets} from '../actions/Pets';
 import 'antd/dist/antd.css';
 import './AddingPet.css';
 
