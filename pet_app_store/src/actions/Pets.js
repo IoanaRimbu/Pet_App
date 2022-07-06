@@ -31,6 +31,25 @@ const deletePetSuccess = data => ({
   payload: data,
   type: types.DELETE_PET_SUCCESS,
 });
+export const editPageCleanUp = () => ({
+  type: types.EDIT_PAGE_CLEANUP,
+});
+const receivePetFailure = data => ({
+  payload: data,
+  type: types.RECIVE_PET_FAILURE,
+});
+const receivePetSuccess = data => ({
+  payload: data,
+  type: types.RECIVE_PET_SUCCESS,
+});
+
+const editPetFailure = data => ({
+  payload: data,
+  type: types.EDIT_PET_FAILURE,
+});
+const editPetSuccess = () => ({
+  type: types.EDIT_PET_SUCCESS,
+});
 
 export const getPets = status => async dispatch => {
   dispatch(requestPets());
@@ -79,5 +98,37 @@ export const deletePet = id => async dispatch => {
       error.message ||
       error.toString();
     dispatch(deletePetFailure(message));
+  }
+};
+
+//get pet
+export const getPet = id => async dispatch => {
+  dispatch(requestPets());
+  try {
+    const response = await axios.get(
+      `https://petstore.swagger.io/v2/pet/${id}`
+    );
+    dispatch(receivePetSuccess(response.data));
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    dispatch(receivePetFailure(message));
+  }
+};
+
+//edit pet EDIT_PET
+export const editPet = pet => async dispatch => {
+  dispatch(requestPets());
+  try {
+    await axios.put('https://petstore.swagger.io/v2/pet', pet);
+    dispatch(editPetSuccess());
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    dispatch(editPetFailure(message));
   }
 };

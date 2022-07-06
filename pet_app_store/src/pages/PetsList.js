@@ -16,6 +16,7 @@ const PetsList = () => {
 
   const pets = useSelector(state => state.pets);
   const pet = useSelector(state => state.pet);
+  const updatedPet = useSelector(state => state.updatedPet);
   const deletedPet = useSelector(state => state.deletedPet);
   const error = useSelector(state => state.error);
   const loading = useSelector(state => state.isLoading);
@@ -32,6 +33,9 @@ const PetsList = () => {
         setHeaderDisplay(true);
       } else if (deletedPet) {
         setHeaderDisplayMessage('Pet deleted with success');
+        setHeaderDisplay(true);
+      } else if (updatedPet) {
+        setHeaderDisplayMessage('Pet updated with success');
         setHeaderDisplay(true);
       }
     } else if (error) {
@@ -70,8 +74,9 @@ const PetsList = () => {
       key: 'action',
       render: (_, record) => (
         <Space perStatus={petStatus} size="middle">
-          <a>View</a>
-          <a>Edit</a>
+          <Link to={`/pets/viewPet/${record.id}`}>View</Link>
+          <Link to={`/pets/editPet/${record.id}`}>Edit</Link>
+          {/* <a>Edit</a> */}
           <a
             onClick={e => {
               Modal.confirm({

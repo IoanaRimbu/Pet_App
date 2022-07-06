@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {Button, Form, Input, Select} from 'antd';
 import {MinusCircleOutlined, PlusOutlined} from '@ant-design/icons';
-import {postPets} from '../actions/Pets';
+import {editPet, postPets} from '../actions/Pets';
 import 'antd/dist/antd.css';
 import './AddingPet.css';
 
@@ -58,9 +58,18 @@ const formItemLayoutWithOutLabel = {
 
 const AddingPet = () => {
   const [pet, setPet] = useState({photoUrls: []});
+  const petDetails = useSelector(state => state.petDetails);
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (petDetails) {
+      form.setFieldsValue({
+        ...petDetails,
+      });
+    }
+  }, [petDetails]);
+  console.log(pet);
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const onReset = () => {
@@ -74,8 +83,13 @@ const AddingPet = () => {
         {...layout}
         initialValues={{fotoUrls: ['']}}
         onFinish={() => {
-          dispatch(postPets(pet));
-          navigate('/pets');
+          if (petDetails) {
+            dispatch(editPet(pet));
+            navigate('/pets');
+          } else {
+            dispatch(postPets(pet));
+            navigate('/pets');
+          }
         }}
       >
         <Form.Item
@@ -92,11 +106,12 @@ const AddingPet = () => {
             onChange={e => setPet({...pet, name: e.target.value})}
           />
         </Form.Item>
-
         <Form.Item name="id" label="Id">
-          <Input />
+          <Input
+            value={pet.id}
+            onChange={e => setPet({...pet, id: e.target.value})}
+          />
         </Form.Item>
-
         <Form.Item
           className="status-field__selector"
           name="status"
@@ -110,6 +125,7 @@ const AddingPet = () => {
           <Select
             placeholder="Select a option and change input text above"
             allowClear
+            onChange={e => setPet({...pet, status: e})}
           >
             <Option value="available">available</Option>
             <Option value="sold">sold</Option>
@@ -118,6 +134,7 @@ const AddingPet = () => {
         </Form.Item>
 
         {/* =======================>>>>>>> add input for imageUrl*/}
+
         <Form.List name="fotoUrls" className="foto-urls__input">
           {(fields, {add, remove}, {errors}) => (
             <>
@@ -142,7 +159,7 @@ const AddingPet = () => {
                     noStyle
                   >
                     <Input
-                      value={pet.photoUrls[index]}
+                      value={pet.photoUrls && pet.photoUrls[index]}
                       onChange={e => {
                         let currentUrlArr = pet.photoUrls;
 
@@ -185,11 +202,16 @@ const AddingPet = () => {
           )}
         </Form.List>
         {/* =======================>>>>>>> add input */}
-
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            Add Pet
-          </Button>
+          {petDetails ? (
+            <Button type="primary" htmlType="submit">
+              Save
+            </Button>
+          ) : (
+            <Button type="primary" htmlType="submit">
+              Add Pet
+            </Button>
+          )}
           <Button htmlType="button" onClick={onReset}>
             Reset
           </Button>

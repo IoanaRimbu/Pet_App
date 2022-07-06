@@ -54,6 +54,42 @@ const pets = (state = intialState, action) => {
         isLoading: false,
         deletedPet: false,
       };
+    case 'RECIVE_PET_SUCCESS':
+      return {
+        ...state,
+        petDetails: payload,
+        error: null,
+        isLoading: false,
+        recivedPetDetails: true,
+      };
+    case 'RECIVE_PET_FAILURE':
+      return {
+        ...state,
+        error: payload,
+        petDetails: null,
+        isLoading: false,
+        recivedPetDetails: false,
+      };
+    case 'EDIT_PET_SUCCESS':
+      return {
+        ...state,
+        updatedPet: true,
+        error: null,
+        isLoading: false,
+      };
+    case 'EDIT_PET_FAILURE':
+      return {
+        ...state,
+        error: payload,
+        isLoading: false,
+        updatedPet: false,
+      };
+    case 'EDIT_PAGE_CLEANUP':
+      return {
+        ...state,
+        petDetails: null,
+        error: null,
+      };
     default:
       return state;
   }
