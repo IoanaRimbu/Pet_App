@@ -3,8 +3,8 @@ work sample swagger
 
 ## Run the project
 You just need to instal the node modules and run the project:
--npm install
--npm start
+npm install
+npm start
 
 ## Description
 This project is built with Reactjs
