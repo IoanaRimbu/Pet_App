@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/pet_app_store/static/css/main.7dc45bf8.css",
+    "main.js": "/pet_app_store/static/js/main.32c71d62.js",
+    "static/media/cat.jpg": "/pet_app_store/static/media/cat.126930d03083a1b05766.jpg",
+    "index.html": "/pet_app_store/index.html",
+    "main.7dc45bf8.css.map": "/pet_app_store/static/css/main.7dc45bf8.css.map",
+    "main.32c71d62.js.map": "/pet_app_store/static/js/main.32c71d62.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7dc45bf8.css",
+    "static/js/main.32c71d62.js"
+  ]
+}
