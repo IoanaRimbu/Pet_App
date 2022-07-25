@@ -1,7 +1,7 @@
 {
   "name": "pet_app_store",
   "version": "0.1.0",
-  "homepage": "https://ioanarimbu.github.io/pet_app",
+  "homepage": "https://ioanarimbu.github.io/Pet_App",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
